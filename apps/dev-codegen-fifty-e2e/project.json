@@ -1,0 +1,29 @@
+{
+  "name": "dev-codegen-fifty-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dev-codegen-fifty-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/dev-codegen-fifty-e2e/cypress.json",
+        "devServerTarget": "dev-codegen-fifty:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "dev-codegen-fifty:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dev-codegen-fifty-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["dev-codegen-fifty"]
+}

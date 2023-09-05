@@ -1,0 +1,95 @@
+{
+  "name": "dev-codegen-fifty",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/dev-codegen-fifty/src",
+  "prefix": "dev-codegen-fifty",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/dev-codegen-fifty",
+        "index": "apps/dev-codegen-fifty/src/index.html",
+        "main": "apps/dev-codegen-fifty/src/main.ts",
+        "polyfills": "apps/dev-codegen-fifty/src/polyfills.ts",
+        "tsConfig": "apps/dev-codegen-fifty/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/dev-codegen-fifty/src/favicon.ico",
+          "apps/dev-codegen-fifty/src/assets"
+        ],
+        "styles": ["apps/dev-codegen-fifty/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/dev-codegen-fifty/src/environments/environment.ts",
+              "with": "apps/dev-codegen-fifty/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "dev-codegen-fifty:build:production"
+        },
+        "development": {
+          "browserTarget": "dev-codegen-fifty:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "dev-codegen-fifty:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/dev-codegen-fifty/src/**/*.ts",
+          "apps/dev-codegen-fifty/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/dev-codegen-fifty"],
+      "options": {
+        "jestConfig": "apps/dev-codegen-fifty/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
